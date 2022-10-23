@@ -1,5 +1,25 @@
 {
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "name": "express-learning-lws",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakibul-wdp/express-learning-lws.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rakibul-wdp/express-learning-lws/issues"
+  },
+  "homepage": "https://github.com/rakibul-wdp/express-learning-lws#readme",
+  "description": ""
 }

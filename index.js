@@ -1,20 +1,11 @@
 const express = require('express');
+const handle = require('./handle');
 
 const app = express();
 
-const router = express.Router({
-  caseSensitive: true,
-});
+app.locals.title = 'My App';
 
-app.use(router);
-
-router.get('/about', (req, res) => {
-  res.send('This is home page');
-});
-
-router.post('/', (req, res) => {
-  res.send('This is home page with post request');
-});
+app.get('/', handle);
 
 app.listen(3000, () => {
   console.log('listening on port 3000');
