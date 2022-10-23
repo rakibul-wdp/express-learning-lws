@@ -2,11 +2,17 @@ const express = require('express');
 
 const app = express();
 
-app.get('/', (req, res) => {
+const router = express.Router({
+  caseSensitive: true,
+});
+
+app.use(router);
+
+router.get('/about', (req, res) => {
   res.send('This is home page');
 });
 
-app.post('/', (req, res) => {
+router.post('/', (req, res) => {
   res.send('This is home page with post request');
 });
 
