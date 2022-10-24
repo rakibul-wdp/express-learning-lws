@@ -1,6 +1,6 @@
 const handle = (req, res) => {
-  console.log(req.app.locals.title);
-  res.send('This is home page');
+  console.log(req.get('content-type'));
+  res.send('hello world');
 };
 
 module.exports = handle;

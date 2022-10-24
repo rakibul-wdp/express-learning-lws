@@ -1,4 +1,5 @@
 const express = require('express');
+const handle = require('./handle');
 
 const app = express();
 app.use(express.json());
@@ -6,20 +7,22 @@ app.use(express.json());
 const adminRoute = express.Router();
 
 adminRoute.get('/dashboard', (req, res) => {
-  console.log(req.query);
+  console.log(req.secure);
   res.send('We are in Admin Dashboard');
 });
 
 app.use('/admin', adminRoute);
 
-app.get('/user/:id', (req, res) => {
-  console.log(req.query);
-  res.send('Hello world');
-});
+app.get('/user/:id', handle);
 
 app.post('/user', (req, res) => {
-  console.log(req.body);
+  console.log(req.route);
   res.send('Hello world post');
+});
+
+app.get('/user', (req, res) => {
+  console.log(req.route);
+  res.send('Hello world get');
 });
 
 app.listen(3000, () => {
