@@ -4,8 +4,12 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+app.get('/test', (req, res) => {
+  res.send('Hello');
+})
+
 app.get('/about', (req, res) => {
-  res.cookie('name', 'omoktomokamrai');
+  res.redirect('/test');
   res.end();
 });
 
