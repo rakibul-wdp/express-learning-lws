@@ -1,37 +1,34 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 
-app.get('/', (req, res) => {
-  for(let i = 0; i <= 10; i++) {
-    if (i === 5) {
-      next('there was an error');
+app.get('/', (req, res, next) => {
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err);
     } else {
-      res.write('a');
+      res.send(data);
     }
-  }
-  res.end();
+  });
 });
 
-app.get('/', (req, res) => {
-  res.send(a);
-});
-
-// 404 error handler
 app.use((req, res, next) => {
-  res.send('Requested url was not found...!!!');
-});
+  console.log('I am not called');
+  next();
+})
 
+// custom error handling
 app.use((err, req, res, next) => {
-  if (res.headersSent) {
-    next('There wan a problem');
+  if (res.headersSend) {
+    next('There was a problem');
   } else {
     if (err.message) {
       res.status(500).send(err.message);
     } else {
-      res.status(500).send('There was an error...!!!');
+      res.send('There wan an error');
     }
   }
-});
+})
 
 app.listen(3000, () => {
   console.log('listening on port 3000');
