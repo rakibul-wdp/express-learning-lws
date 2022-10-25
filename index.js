@@ -5,11 +5,12 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.get('/about', (req, res) => {
-  console.log(res.headersSent);
-  res.render('pages/about', {
-    name: 'Bangladesh'
-  });
-  console.log(res.headersSent);
+  // res.send('About');
+  // res.end();
+  // res.json({
+  //   name: 'Bangladesh'
+  // })
+  res.sendStatus(200);
 });
 
 app.listen(3000, () => {
