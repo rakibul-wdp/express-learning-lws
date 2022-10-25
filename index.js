@@ -9,7 +9,8 @@ app.get('/test', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-  res.redirect('/test');
+  res.set('Platform', 'Omok Tomok Amrai');
+  console.log(res.get('Platform'));
   res.end();
 });
 
