@@ -2,16 +2,15 @@ const express = require('express');
 
 const app = express();
 
-app.set('view engine', 'ejs');
+const logger = (req, res, next) => {
+  console.log(`${new Date(Date.now()).toLocaleString()} - ${req.method} - ${req.originalUrl} - ${req.protocol} - ${req.ip}`);
+  res.end();
+}
 
-app.get('/test', (req, res) => {
-  res.send('Hello');
-})
+app.use(logger);
 
 app.get('/about', (req, res) => {
-  res.set('Platform', 'Omok Tomok Amrai');
-  console.log(res.get('Platform'));
-  res.end();
+  res.send('About');
 });
 
 app.listen(3000, () => {
