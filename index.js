@@ -2,15 +2,37 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 
-app.get('/', (req, res, next) => {
-  fs.readFile('/file-does-not-exist', (err, data) => {
-    if (err) {
+// app.get('/', (req, res, next) => {
+//   fs.readFile('/file-does-not-exist', (err, data) => {
+//     if (err) {
+//       next(err);
+//     } else {
+//       res.send(data);
+//     }
+//   });
+// });
+
+// app.get('/', (req, res, next) => {
+//   setTimeout(function () {
+//     try {
+//       console.log(a);
+//     } catch (err) {
+//       next(err);
+//     }
+//   }, 100);
+// })
+
+app.get('/', [
+  (req, res, next) => {
+    fs.readFile('/file-doesnt-exist', 'utf-8', (err, data) => {
+      console.log(data);
       next(err);
-    } else {
-      res.send(data);
-    }
-  });
-});
+    });
+  },
+  (req, res, next) => {
+    console.log(data.property);
+  }
+])
 
 app.use((req, res, next) => {
   console.log('I am not called');
