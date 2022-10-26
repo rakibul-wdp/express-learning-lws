@@ -11,14 +11,24 @@ var upload = multer({
     fileSize: 1000000, // 1MB
   },
   fileFilter: (req, file, cb) => {
-    if (
-      file.mimetype === 'image/png' ||
-      file.mimetype === 'image/jpg' ||
-      file.mimetype === 'image/jpeg'
-    ) {
-      cb(null, true);
+    if (file.fieldname === 'avatar') {
+      if (
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/jpeg'
+      ) {
+        cb(null, true);
+      } else {
+        cb(new Error('only .jpg, .png or .jpeg format allowed...!!!'));
+      }
+    } else if (file.fieldname === 'doc') {
+        if (file.mimetype === 'application/pdf') {
+          cb(null, true);
+        } else {
+          cb(new Error('Only .pdf format allowed'))
+        }
     } else {
-      cb(new Error('only .jpg, .png or .jpeg format allowed...!!!'));
+      cb(new Error('There was an unknown error...!!!'));
     }
   },
 })
@@ -26,7 +36,10 @@ var upload = multer({
 const app = express();
 
 // application route
-app.post('/', upload.single('avatar'), (req, res) => {
+app.post('/', upload.fields([
+  {name: 'avatar', maxCount: 1},
+  {name: 'doc', maxCount: 1}
+]), (req, res) => {
   res.send('Hello world');
 });
 
