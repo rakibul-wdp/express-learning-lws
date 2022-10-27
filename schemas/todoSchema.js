@@ -16,6 +16,7 @@ const todoSchema = mongoose.Schema({
   }
 });
 
+// instance method
 todoSchema.methods = {
   findActive: function() {
     return mongoose.model('Todo').find({status: 'inactive'});
@@ -23,6 +24,13 @@ todoSchema.methods = {
   findActiveCallback: function (cb) {
     return mongoose.model('Todo').find({status: 'active'}, cb);
   },
+};
+
+// static methods
+todoSchema.statics = {
+  findByJS: function() {
+    return this.find({title: /js/i});
+  }
 }
 
 module.exports = todoSchema;

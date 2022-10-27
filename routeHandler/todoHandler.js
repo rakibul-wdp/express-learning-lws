@@ -45,6 +45,14 @@ router.get('/active-callback', (req, res) => {
   });
 });
 
+// GET ACTIVE TODOS
+router.get('/js', async (req, res) => {
+  const data = await Todo.findByJS();
+  res.status(200).json({
+    data,
+  });
+});
+
 // GET A TODO by ID
 router.get('/:id', async (req, res) => {
   await Todo.find({_id: req.params.id}, (err, data) => {
