@@ -53,6 +53,14 @@ router.get('/js', async (req, res) => {
   });
 });
 
+// GET TODOS BY LANGUAGE
+router.get('/language', async (req, res) => {
+  const data = await Todo.find().byLanguage('react');
+  res.status(200).json({
+    data,
+  });
+});
+
 // GET A TODO by ID
 router.get('/:id', async (req, res) => {
   await Todo.find({_id: req.params.id}, (err, data) => {
