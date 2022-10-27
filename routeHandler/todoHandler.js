@@ -47,7 +47,22 @@ router.post('/all', async (req, res) => {
 
 // PUT TODO
 router.put('/:id', async (req, res) => {
-
+  await Todo.updateOne({_id: req.params.id}, {
+    $set: {
+      status: 'inactive',
+      title: 'Learn DSA from JSBD',
+    }
+  }, (err) => {
+    if (err) {
+      res.status(500).json({
+        error: 'There was a server side error'
+      })
+    } else {
+      res.status(200).json({
+        message: 'Todo was updated successfully'
+      })
+    }
+  })
 });
 
 // DELETE TODO
