@@ -7,9 +7,7 @@ const app = express();
 app.use(express.json());
 
 // database connection with mongoose
-mongoose.connect('mongodb://localhost/todos', {useNewUrlParser: true, useUnifiedTopology: true,})
-  .then(() => console.log('connection successful'))
-  .catch(err => console.log(err))
+mongoose.connect('mongodb+srv://practice:0lqI0EVdoUv5gZVS@cluster0.r4qbxzx.mongodb.net/todo?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true,}).then(() => console.log('connection successful')).catch(err => console.log(err))
 
 // application routes
 app.use('/todo', todoHandler);
@@ -25,3 +23,5 @@ function errorHandler(err, req, res, next) {
 app.listen(3000, () => {
   console.log('listening on port 3000');
 });
+
+// 
