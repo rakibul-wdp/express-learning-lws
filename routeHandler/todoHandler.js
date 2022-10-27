@@ -26,6 +26,15 @@ router.get('/', async (req, res) => {
   })
 });
 
+// GET ACTIVE TODOS
+router.get('/active', async (req, res) => {
+  const todo = new Todo();
+  const data = await todo.findActive();
+  res.status(200).json({
+    data,
+  })
+});
+
 // GET A TODO by ID
 router.get('/:id', async (req, res) => {
   await Todo.find({_id: req.params.id}, (err, data) => {
@@ -43,9 +52,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST A TODO
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
   const newTodo = new Todo(req.body);
-  await newTodo.save((err) => {
+  newTodo.save((err) => {
     if (err) {
       res.status(500).json({
         error: 'There was a server side error'
