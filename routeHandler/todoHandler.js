@@ -7,9 +7,9 @@ const Todo = new mongoose.model('Todo', todoSchema);
 
 // GET ALL THE TODOS
 router.get('/', checkLogin, (req, res) => {
-  console.log(req.username);
-  console.log(req.userId);
-  Todo.find({status: 'active'}).select({
+  Todo.find()
+  .populate('user', 'name username -_id')
+  .select({
     _id: 0,
     __v: 0,
     date: 0
@@ -86,7 +86,7 @@ router.post('/', checkLogin, async (req, res) => {
     ...req.body,
     user: req.userId
   });
-  
+
   try {
     await newTodo.save();
     res.status(200).json({
